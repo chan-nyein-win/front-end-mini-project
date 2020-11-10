@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>CSS Tables</title>
+        <!-- <link rel="stylesheet" href="./template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <script src="./template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="./template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="./template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script> -->
+
+        <link rel="stylesheet" href="../template/w3.css">
+        <link rel="stylesheet" href="../template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../template/codemirror.css">
+        <!-- <link rel="stylesheet" href="./template/primary-unified.css"> -->
+        <link rel="stylesheet" href="../template/codemirror-5.40.2/lib/codemirror.css">
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../template/run_prettify.js"></script>
+        <style>
+            /* #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 250px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 250px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 20px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: none;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c;
+                word-wrap: break-word;
+            } */
+            #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 300px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 300px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 50px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: #ffffc6;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c;
+                word-wrap: break-word;
+            }
+           
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            .nav>li>a:focus, .nav>li>a:hover {
+                text-decoration: none !important;
+                background-color: rgba(223, 240, 216,0.3)!important;
+            }
+
+            
+            /* Customers Table */
+            #customers {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+            
+            #customers tr:hover {background-color: #ddd;}
+            
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #284f5c !important;
+                color: white;
+            }
+            /* End */
+
+            /* Table 1 */
+            #tb1,#tb1 th,#tb1 td { 
+                border: 1px solid black;
+            }
+            /* end */
+
+            /* Table 2 */
+            #tb2 {
+                border-collapse: collapse;
+            }
+
+            #tb2,#tb2 td,#tb2 th {
+                border: 1px solid black;
+            }
+            /* end */
+            
+            /* Table 3 */
+            #tb3{
+               
+                border-collapse: collapse;
+                border: 1px solid black;
+            }
+            /* end */
+
+            /* Table 4 */
+            #tb4,#tb4 td,#tb4 th {
+                border: 1px solid black;
+            }
+
+            #tb4 {
+                border-collapse: collapse;
+                width: 100%;
+             }
+
+            #tb4 th {
+                height: 50px;
+            }
+            /* end */
+
+            /* Table 5 */
+            #tb5,#tb5 td,#tb5 th {    
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            #tb5 {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #tb5 th,#tb5 td {
+                padding: 15px;
+            }
+            /* end */
+
+            /* Table 6 */
+            #tb6 {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #tb6 th,#tb6 td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            #tb6 tr:hover {background-color:#f5f5f5;}
+            /* end */
+
+            /* table 7 */
+            #tb7 {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #tb7 th,#tb7 td {
+                text-align: left;
+                padding: 8px;
+            }
+
+            #tb7 tr:nth-child(even) {background-color: #f2f2f2;}
+            /* end */
+
+            /* table 8 */
+            #tb8 {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #tb8 th,#tb8 td {
+                text-align: left;
+                padding: 8px;
+            }
+
+            #tb8 tr:nth-child(even){background-color: #f2f2f2}
+
+            #tb8 th {
+                background-color: #284f5c !important;
+                color: white;
+            }
+
+            /* end */
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            @media (max-width:767px) {
+
+                #wrapper {
+                padding-left: 0;
+                }
+
+                #sidebar-wrapper {
+                left: 0;
+                }
+
+                #wrapper.active {
+                    position: relative;
+                    left: 250px;
+                }
+
+                #wrapper.active #sidebar-wrapper {
+                    left: 250px;
+                    width: 250px;
+                    transition: all 0.4s ease 0s;
+                }
+
+                #menu-toggle {
+                    display: inline-block;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="aa" >
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+                        <div  class="navbar-brand">
+                            <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <!-- <a href="#">Project name</a> -->
+                        </div>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse ">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../index.html">Home</a>
+                            </li>
+                            <li><a href="../html/Html_home.html">HTML</a></li>
+                            <li><a href="../css/css-Introduction.html">CSS</a></li>
+                            <li><a href="#javascript">JAVASCRIPT</a></li>
+                            <li><a href="#about">JQUERY</a></li>
+                            <li><a href="#about">BOOTSTRAP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <nav id="spy">
+                    <ul class="sidebar-nav nav">
+                        <li>
+                            <a href="css-Introduction.html">
+                                <span class="fa fa-home solo">CSS Introduction</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-syntax.html">
+                                <span class="fa fa-anchor solo">CSS Syntax</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="css-borders.html">
+                                <span class="fa fa-anchor solo">CSS Borders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-tables.html">
+                                <span class="fa fa-anchor solo">CSS Tables</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-boxModel.html">
+                                <span class="fa fa-anchor solo">CSS Box Model</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-color.html">
+                                <span class="fa fa-anchor solo">CSS Color</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-background.html">
+                                <span class="fa fa-anchor solo">CSS Background</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Page content -->
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h2>CSS Tables</h2>
+                                        <a href="../css/css-borders.html"><button type="button" class="btn">Previous</button></a>
+                                        <a href="../css/css-boxModel.html"><button type="button" class="btn" style="float:right;">Next</button></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="w3-panel">
+                                            <p>The look of an HTML table can be greatly improved with CSS:</p>
+
+                                            <table id="customers">
+                                                <tbody>
+                                                    <tr>
+                                                       <th>Company</th>
+                                                       <th>Contact</th>
+                                                       <th>Country</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Alfreds Futterkiste	</td>
+                                                        <td>Maria Anders</td>
+                                                        <td>Germany</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Berglunds snabbköp</td>
+                                                        <td>Francisco Chang</td>
+                                                        <td>Mexico</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ernst Handel</td>
+                                                        <td>Roland Mendel</td>
+                                                        <td>Austria</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Island Trading</td>
+                                                        <td>Helen Bennett</td>
+                                                        <td>UK</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Königlich Essen</td>
+                                                        <td>Philip Cramer</td>
+                                                        <td>Germany</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Laughing Bacchus Winecellars</td>
+                                                        <td>Yoshi Tannamuri</td>
+                                                        <td>Canada</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Magazzini Alimentari Riuniti</td>
+                                                        <td>Giovanni Rovelli</td>
+                                                        <td>Italy</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table><br>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy">Try it Yourself »</a>
+                                        </div>    
+                                        <div class="w3-panel">
+                                            <h3>Table Borders</h3>
+                                            <p>To specify table borders in CSS, use the <span style="color:red">border</span> property.</p><br>
+                                            <p>The example below specifies a black border for <span style="color:black">< <span style="color:black">table</span><span style="color:black"> ></span></span>
+                                            <span style="color:black">< <span style="color:black">th</span><span style="color:black"> ></span> and
+                                            <span style="color:black">< <span style="color:black">td</span><span style="color:black"> ></span>elements:</p>
+                                            <h3>Add a border to a table:</h3>
+                                            <!-- error -->
+                                            <table id="tb1">
+                                              <tr>
+                                                <th>Firstname</th>
+                                                <th>Lastname</th>
+                                              </tr>
+                                              <tr>
+                                                <td>Peter</td>
+                                                <td>Griffin</td>
+                                              </tr>
+                                              <tr>
+                                                <td>Lois</td>
+                                                <td>Griffin</td>
+                                              </tr>
+                                            </table>
+                                        </div>   
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    table, th, td<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">1px solid black</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                                                    <span style="color:black">}
+                                                </span>        
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_border">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>Notice that the table in the example above has double borders.</p><br>
+
+                                            <p>This is because both the table and the <span style="color:black"> ></span> and
+                                            <span style="color:black">< <span style="color:black">td</span><span style="color:black"> ></span> elements have separate borders.</p>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Collapse Table Borders</h3>
+    
+                                            <p>The <span style="color:red">border-collapse</span> property sets whether the table borders should be collapsed into a single border:</p>
+                                            <h3>Let the borders collapse:</h3>
+                                            
+                                            <table id="tb2">
+                                              <tr>
+                                                <th>Firstname</th>
+                                                <th>Lastname</th>
+                                              </tr>
+                                              <tr>
+                                                <td>Peter</td>
+                                                <td>Griffin</td>
+                                              </tr>
+                                              <tr>
+                                                <td>Lois</td>
+                                                <td>Griffin</td>
+                                              </tr>
+                                            </table>
+                                            
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    table<span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-collapse</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">collapse</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">table, th, td</span>
+                                                    <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">1px solid black</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span>
+                                                </span>        
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_border-collapse">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>If you only want a border around the table, only specify the <span style="color:red">border</span> property for <span style="color:black">< <span style="color:black">table</span><span style="color:black"> ></span></span>:</p>
+                                            <table id="tb3">
+                                              <tr>
+                                                <th>Firstname</th>
+                                                <th>Lastname</th>
+                                              </tr>
+                                              <tr>
+                                                <td>Peter</td>
+                                                <td>Griffin</td>
+                                              </tr>
+                                              <tr>
+                                                <td>Lois</td>
+                                                <td>Griffin</td>
+                                              </tr>
+                                            </table>
+                                        </div>
+                                        <div class="w3-example">
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    table<span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">1px solid black</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>  
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_border2">Try it Yourself »</a>      
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Table Width and Height</h3>
+                                            <p>Width and height of a table are defined by the<span style="color:red"> width</span> and <span style="color:red">height</span> properties.</p><br>
+                                            <p>The example below sets the width of the table to 100%, and the height of the <span style="color:black">< <span style="color:black">th</span><span style="color:black"> ></span></span> elements to 50px:</p>
+                                            <table id="tb4">
+                                                <tr>
+                                                    <th>Firstname</th>
+                                                    <th>Lastname</th>
+                                                    <th>Savings</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Peter</td>
+                                                    <td>Griffin</td>
+                                                    <td>$100</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lois</td>
+                                                    <td>Griffin</td>
+                                                    <td>$150</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Joe</td>
+                                                    <td>Swanson</td>
+                                                    <td>$300</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cleveland</td>
+                                                    <td>Brown</td>
+                                                    <td>$250</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3><div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    table<span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">width</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">100%</span> 
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}</span><br><br>
+                                                    <span style="color:brown">th</span>
+                                                    <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">height</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">70px</span> 
+                                                    <span style="color:black">;</span><br>
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_width">Try it Yourself »</a>        
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Table Padding</h3>
+                                            <p>To control the space between the border and the contact in a table, use the  <span style="color:red">padding</span> property on <span style="color:black">< <span style="color:black">th</span><span style="color:black"> ></span></span> 
+                                             and <span style="color:black">< <span style="color:black">td</span><span style="color:black"> ></span></span> elements:</p>
+
+                                            <table id="tb5">
+                                                <tr>
+                                                    <th>Firstname</th>
+                                                    <th>Lastname</th>
+                                                    <th>Savings</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Peter</td>
+                                                    <td>Griffin</td>
+                                                    <td>$100</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lois</td>
+                                                    <td>Griffin</td>
+                                                    <td>$150</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Joe</td>
+                                                    <td>Swanson</td>
+                                                    <td>$300</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cleveland</td>
+                                                    <td>Brown</td>
+                                                    <td>$250</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    th, td<span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">padding</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">15px</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black">: </span>
+                                                    <span style="color:blue">left</span> 
+                                                    <span style="color:black">;</span><br>
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_padding">Try it Yourself »</a>    
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Hoverable Table</h3>
+                                            <p>Use the <span style="color:red">:hover</span> selector on <span style="color:black">< <span style="color:black">tr</span><span style="color:black"> ></span></span> to highlight table rows on mouse over:</p>
+                                            <table id="tb6">
+                                                <tr>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Points</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Peter</td>
+                                                    <td>Griffin</td>
+                                                    <td>$100</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Lois</td>
+                                                    <td>Griffin</td>
+                                                    <td>$150</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Joe</td>
+                                                    <td>Swanson</td>
+                                                    <td>$300</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cleveland</td>
+                                                    <td>Brown</td>
+                                                    <td>$250</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    tr:hover<span style="color:black">{</span>
+                                                    <span style="color:red">background-color</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">#f5f5f5</span> 
+                                                    <span style="color:black">;</span> 
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_hover">Try it Yourself »</a>
+                                        </div>            
+                                        <div class="w3-panel">
+                                            <h3>Striped Tables</h3>
+                                            <table id="tb7">
+                                                <tr>
+                                                  <th>First Name</th>
+                                                  <th>Last Name</th>
+                                                  <th>Points</th>
+                                                </tr>
+                                                <tr>
+                                                  <td>Peter</td>
+                                                  <td>Griffin</td>
+                                                  <td>$100</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>Lois</td>
+                                                  <td>Griffin</td>
+                                                  <td>$150</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>Joe</td>
+                                                  <td>Swanson</td>
+                                                  <td>$300</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>Cleveland</td>
+                                                  <td>Brown</td>
+                                                  <td>$250</td>
+                                                </tr>
+                                            </table>
+                                            <p>For zebra-striped tables, use the <span style="color:red">nth-child()</span> selector and add a <span style="color:red">background-color</span> to all even (or odd) table rows:</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    tr:nth-child(even)<span style="color:black">{</span>
+                                                    <span style="color:red">background-color</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">#f5f5f5</span> 
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span>
+                                                </span> 
+                                            </div>       
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_striped">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Table Color</h3>
+                                            <p>The example below specifies the background color and text color of <span style="color:black">< <span style="color:black">th</span><span style="color:black"> ></span></span> elements:</p>
+                                            <table id="tb8">
+                                                <tr>
+                                                  <th>Firstname</th>
+                                                  <th>Lastname</th>
+                                                  <th>Savings</th>
+                                                </tr>
+                                                <tr>
+                                                  <td>Peter</td>
+                                                  <td>Griffin</td>
+                                                  <td>$100</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>Lois</td>
+                                                  <td>Griffin</td>
+                                                  <td>$150</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>Joe</td>
+                                                  <td>Swanson</td>
+                                                  <td>$300</td>
+                                                </tr>
+                                                <tr>
+                                                  <td>Cleveland</td>
+                                                  <td>Brown</td>
+                                                  <td>$250</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="w3-example">
+                                            <div class="w3-example">
+                                                <h3>Example</h3>
+                                                <div class="w3-code nottranslate jsHigh">
+                                                    <span style="color:brown">
+                                                        th<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <span style="color:red">background-color</span>
+                                                        <span style="color:black">:</span> 
+                                                        <span style="color:blue">#4CAF50</span> 
+                                                        <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                        <span style="color:red">color</span>
+                                                        <span style="color:black">: </span>
+                                                        <span style="color:blue">white</span> 
+                                                        <span style="color:black">;</span><br>
+                                                        <span style="color:black">}</span>
+                                                        <span style="color:blue"><</span> 
+                        
+                                                    </span>
+                                                </div> 
+                                                <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_table_color">Try it Yourself »</a> 
+                                            </div>              
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+                
+        <script>
+            /*Menu-toggle*/
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+                
+            });
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+
+        <link rel="stylesheet" href="./template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <script src="./template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="./template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="./template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <style>
+        
+            .navbar{
+                margin-bottom: 0;
+                background-color: #576e57;
+                z-index: 9999;
+                border: 0;
+                font-size: 15px !important;
+                line-height: 1.42857143 !important;
+                letter-spacing: 4.5px;
+                border-radius: 0;
+            }
+            .navbar li a, .navbar .navbar-brand{
+                color: #fff !important;
+            }
+            .navbar-nav li a:hover, .navbar-nav li.active a {
+                color: #284f5c !important;
+                background-color: #fff !important;
+            }
+            .navbar-default .navbar-toggle {
+                border-color: transparent;
+                color: #fff !important;
+            }
+            
+            .jumbotron {
+                background-color: #576e57;
+                color: #fff;
+                padding: 0;
+            }
+            #bgImage{
+                /* width: 1400px; */
+                width: 100%;
+                height: 400px;
+                opacity: 0.9;
+                /* background-image: url("./images/maxresdefault.jpg"); */
+                
+            }
+            #para{
+                color:white;
+                width: 80%;
+                padding-top: 50px;
+            }
+            #para p{
+                text-indent: 100px;
+            }
+            #content{
+                padding-top: 0;
+            }
+            .logo-small {
+                color: #576e57;
+                font-size: 50px;
+            }
+            .container {
+                padding: 30px 120px;
+            }
+            .person {
+               border: 10px solid transparent;
+               margin-bottom: 25px;
+               width: 50%;
+               height: 50%;
+            }
+            .ourTeam{
+                /* background-color: #bae4ba; */
+                background-color: #ddffdd;
+                width: 100%;
+                height: 370px;
+            }
+            @media screen and (max-width: 768px) {
+                .col-sm-4 {
+                   text-align: center;
+                   margin: 25px 0;
+                }
+            }
+        </style>
+    </head>
+    <body> 
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#myPage"><img src="./images/globe-icon.png" style="width:60px"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#html">HTML</a></li>
+                        <li><a href="./css/css-Introduction.html">CSS</a></li>
+                        <li><a href="#javascript">JAVASCRIPT</a></li>
+                        <li><a href="#jquery">JQUERY</a></li>
+                        <li><a href="#bootstrap">BOOTSTRAP</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="jumbotron">
+            <!-- <img src="./images/bb1ca3_1d697b29bde047cc91563c421e8b35dc_mv2.jpg" id="animated_div"> -->
+            <div class="row" id="bgImage">
+                <div class="container-fluid" id="para">
+                    <h2 class="text-center">Web Master</h2>
+                    <p class="text-center">
+                        Our project is bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bl
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="container-fluid">
+            <div class="row"> 
+                <div class="col-md-3">
+                    <div class="card" style="width:300px;">
+                        <img src="./images/course_1.jpg" alt="html" class="card-img-top" style="width:100%;height:200px;">
+                        <div class="card-body">
+                            <h4 class="card-title">HTML</h4>
+                            <p class="card-text">Bla Bla bla bla bla bla bla bla bla bla bla bla bla</p>
+                            <button type="button" class="btn btn-outline-secondary btn-primary btn-lg btn-block">Learn HTML</button>
+                        </div>
+                    </div>    
+                </div>
+                <div class="col-md-3">
+                    <div class="card" style="width:300px;">
+                        <img src="./images/course_2.jpg" alt="css" class="card-img-top" style="width:100%;height:200px;">
+                        <div class="card-body">
+                            <h4 class="card-title">CSS</h4>
+                            <p class="card-text">Bla Bla bla bla bla bla bla bla bla bla bla bla bla</p>
+                            <button type="button" class="btn btn-outline-secondary btn-primary btn-lg btn-block">Learn CSS</button>
+                        </div>
+                    </div>    
+                </div>
+                <div class="col-md-3">
+                    <div class="card" style="width:300px;">
+                        <img src="./images/course_3.jpg" alt="js" class="card-img-top" style="width:100%;height:200px;">
+                        <div class="card-body">
+                            <h4 class="card-title">JavaScript</h4>
+                            <p class="card-text">Bla Bla bla bla bla bla bla bla bla bla bla bla bla</p>
+                            <button type="button" class="btn btn-outline-secondary btn-primary btn-lg btn-block">Learn JavaScript</button>
+                                
+                        </div>
+                    </div>    
+                </div>    
+                <div class="col-md-3">
+                    <div class="card" style="width:300px;">
+                        <img src="./images/blog2.jpg" alt="bs" class="card-img-top" style="width:100%;height:200px;">
+                        <div class="card-body">
+                            <h4 class="card-title">bootstrap</h4>
+                            <p class="card-text">Bla Bla bla bla bla bla bla bla bla bla bla bla bla</p>
+                            <button type="button" class="btn btn-outline-secondary btn-primary btn-lg btn-block">Learn Bootstrap</button>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div><br>
+        <div class="container-fluid text-center ourTeam">
+            <h3>Our Team</h3>
+            <h6><em>We are developer, we are creator!</em></h6>
+            <br>
+            <div class="row">
+              <div class="col-sm-2">
+                <img src="./images/FB_IMG_1537105667004.jpg" class="img-circle person" alt="developer"  width="100" height="150">
+                <p><strong>Mr.Myo Thet</strong></p><br>
+              </div>
+              <div class="col-sm-2">
+                <img src="./images/FB_IMG_1537105643757.jpg" class="img-circle person" alt="developer" width="100" height="150">
+                <p><strong>Mr.Mg Mg Thein</strong></p><br>
+              </div>
+              <div class="col-sm-2">
+                <img src="./images/FB_IMG_1537105748818.jpg" class="img-circle person" alt="developer" width="100" height="150">
+                <p><strong>Ms.Chan</strong></p><br>
+              </div>
+              <div class="col-sm-2">
+                <img src="./images/FB_IMG_1537105690507.jpg" class="img-circle person" alt="developer" width="100" height="150">
+                <p><strong>Ms.Phyu Phwe</strong></p><br>
+              </div>
+              <div class="col-sm-2">
+                <img src="./images/500000278_medium.jpg" class="img-circle person" alt="developer" width="100" height="150">
+                <p><strong>Ms.Thiri</strong></p><br>
+              </div>
+              <div class="col-sm-2">
+                <img src="./images/Screenshot_2018-09-16-19-55-44-1.png" class="img-circle person" alt="developer" width="100" height="150">
+                <p><strong>Ms.Myat Chel</strong></p><br>
+              </div>
+            </div>
+        </div>
+        <!-- get in touch -->
+        <div class="container-fluid text-center">
+            <h2 class="title">Get in touch</h2>
+            <div class="row">
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-earphone logo-small"></span>
+                    <h4>Phone</h4>
+                    <p>09-77777777</p>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-envelope logo-small"></span>
+                    <h4>Email</h4>
+                    <p>chan@webmaster.com</p>
+                </div>
+                <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-map-marker logo-small"></span>
+                    <h4>Address</h4>
+                    <p>Tamwe,Yangon</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-grey">
+            <h2 class="text-center">CONTACT</h2>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>Contact us and we'll get back to you within 24 hours.</p>
+                    <p><span class="glyphicon glyphicon-map-marker"></span>Tamwe,Yangon</p>
+                    <p><span class="glyphicon glyphicon-phone"></span>09-77777777</p>
+                    <p><span class="glyphicon glyphicon-envelope"></span>chan@webmaster.com</p>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                           <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                           <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                        </div>
+                    </div>
+                    <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                               <button class="btn btn-default pull-right" type="submit">Send</button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>  
+
+    </body>
+</html>
+
+

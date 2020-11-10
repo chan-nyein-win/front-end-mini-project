@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Box Model</title>
+
+        <link rel="stylesheet" href="../template/w3.css">
+        <link rel="stylesheet" href="../template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../template/codemirror.css">
+        <!-- <link rel="stylesheet" href="./template/primary-unified.css"> -->
+        <link rel="stylesheet" href="../template/codemirror-5.40.2/lib/codemirror.css">
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../template/run_prettify.js"></script>
+        <style>
+            #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 300px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 300px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 50px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: #ffffc6;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c;
+                word-wrap: break-word;
+            }
+           
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            .nav>li>a:focus, .nav>li>a:hover {
+                text-decoration: none !important;
+                background-color: rgba(223, 240, 216,0.3)!important;
+            }
+
+            @media (max-width:767px) {
+
+                #wrapper {
+                padding-left: 0;
+                }
+
+                #sidebar-wrapper {
+                left: 0;
+                }
+
+                #wrapper.active {
+                    position: relative;
+                    left: 250px;
+                }
+
+                #wrapper.active #sidebar-wrapper {
+                    left: 250px;
+                    width: 300px;
+                    transition: all 0.4s ease 0s;
+                }
+
+                #menu-toggle {
+                    display: inline-block;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="aa" >
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+                        <div  class="navbar-brand">
+                            <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse ">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../index.html">Home</a>
+                            </li>
+                            <li><a href="../html/Html_home.html">HTML</a></li>
+                            <li><a href="../css/css-Introduction.html">CSS</a></li>
+                            <li><a href="javascript">JAVASCRIPT</a></li>
+                            <li><a href="#about">JQUERY</a></li>
+                            <li><a href="#about">BOOTSTRAP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <nav id="spy">
+                    <ul class="sidebar-nav nav">
+                        <li>
+                            <a href="css-Introduction.html">
+                                <span class="fa fa-home solo">CSS Introduction</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-syntax.html">
+                                <span class="fa fa-anchor solo">CSS Syntax</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="css-borders.html">
+                                <span class="fa fa-anchor solo">CSS Borders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-tables.html">
+                                <span class="fa fa-anchor solo">CSS Tables</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-boxModel.html">
+                                <span class="fa fa-anchor solo">CSS Box Model</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-color.html">
+                                <span class="fa fa-anchor solo">CSS Color</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-background.html">
+                                <span class="fa fa-anchor solo">CSS Background</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Page content -->
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h2>CSS Box Model</h2>
+                                        <a href="../css/css-tables.html"><button type="button" class="btn">Previous</button></a>
+                                        <a href="../css/css-color.html"><button type="button" class="btn" style="float:right;">Next</button></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="w3-panel">
+                                            <h3>The CSS Box Model</h3>
+                                            <p>All HTML elements can be considered as boxes. In CSS, the term "box model" is used when talking about design and layout.</p><br>
+                                            <p>The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content. The image below illustrates the box model:</p>
+                                            <img src="../images/boxModel.PNG" class="responsive">
+                                            <p>Explanation of the different parts:</p><br>
+                                            <ul>
+                                                <li><b>Content</b>- The content of the box, where text and images appear</li><br>
+                                                <li><b>Padding</b>- Clears an area around the content. The padding is transparent</li><br>
+                                                <li><b>Border</b>- A border that goes around the padding and content</li><br>
+                                                <li><b>Margin</b>- Clears an area outside the border. The margin is transparent</li><br>
+                                            </ul>
+                                            <p>The box model allows us to add a border around elements, and to define space between elements. </p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    div<span style="color:black"> {</span>
+                                                    <span style="color:red">width</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">300px</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border</span>
+                                                    <span style="color:blue"> 25px solid green </span>
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">padding</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">25px</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">margin</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">25px</span>
+                                                    <span style="color:black">;</span><br>
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>        
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_boxmodel">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Width and Height of an Element</h3>
+                                            <p>In order to set the width and height of an element correctly in all borwsers, you need to know how the box model works:</p>
+                                        </div>
+                                        <div class="w3-panel w3-note">
+                                            <p><strong>Important : </strong> When you set the width and height properties of an element with CSS, you just set the width and height of the <strong>content area</strong>. To calculate the full size of an element, you must also add padding, borders and margins.</p>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>Assume we want to style a <span style="color:black">< <span style="color:black">div</span><span style="color:black"> ></span></span> element to have a total width of 350px:</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    div<span style="color:black"> {</span>
+                                                    <span style="color:red">width</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">320px</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border</span>
+                                                    <span style="color:blue"> 5px solid gray </span>
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">padding</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">10px</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">margin</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">0px</span>
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_boxmodel_width">Try it Yourself »</a>       
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>Here is the calculation:</p>
+                                            <div class="container-fluid" style="border: 1px solid #284f5c;"><br>
+                                                <p>320px(width)</p>
+                                                <p>+ 20px (left + right padding)</p>
+                                                <p>+ 10px (left + right border)</p>
+                                                <p>+ 0px (left + right margin)</p>
+                                                <p><b>= 350px</b></p>
+                                            </div><br>
+                                            <p>The total width of an element should be calculated like this:</p><br>
+                                            <p>Total element width = width + left padding + right padding + left border + right border + left margin + right margin</p><br>
+                                            <p>The total height of an element should be calculated like this:</p><br>
+                                            <p>Total element height = height + top padding + bottom padding + top border + bottom border + top margin + bottom margin</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+                
+        <script>
+            /*Menu-toggle*/
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+                
+            });
+        </script>
+    </body>
+</html>
+

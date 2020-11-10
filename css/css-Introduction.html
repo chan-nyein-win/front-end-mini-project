@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        
+        <link rel="stylesheet" href="../template/w3.css">
+        <link rel="stylesheet" href="../template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../template/codemirror.css">
+        <!-- <link rel="stylesheet" href="./template/primary-unified.css"> -->
+        <link rel="stylesheet" href="../template/codemirror-5.40.2/lib/codemirror.css">
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../template/run_prettify.js"></script>
+        <style>
+            #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 300px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 300px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 50px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: #ffffc6;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c;
+                word-wrap: break-word;
+            }
+           
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            .nav>li>a:focus, .nav>li>a:hover {
+                text-decoration: none !important;
+                background-color: rgba(223, 240, 216,0.3)!important;
+            }
+
+            @media (max-width:767px) {
+
+                #wrapper {
+                padding-left: 0;
+                }
+
+                #sidebar-wrapper {
+                left: 0;
+                }
+
+                #wrapper.active {
+                    position: relative;
+                    left: 250px;
+                }
+
+                #wrapper.active #sidebar-wrapper {
+                    left: 250px;
+                    width: 300px;
+                    transition: all 0.4s ease 0s;
+                }
+
+                #menu-toggle {
+                    display: inline-block;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="aa" >
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+                        <div  class="navbar-brand">
+                            <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <!-- <a href="#">Project name</a> -->
+                        </div>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse ">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="#html">HTML</a></li>
+                            <li><a href="../css/css-Introduction.html">CSS</a></li>
+                            <li><a href="#javascript">JAVASCRIPT</a></li>
+                            <li><a href="#jquery">JQUERY</a></li>
+                            <li><a href="#bootstrap">BOOTSTRAP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <nav id="spy">
+                    <ul class="sidebar-nav nav">
+                        <li>
+                            <a href="css-Introduction.html">
+                                <span class="fa fa-home solo">CSS Introduction</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-syntax.html">
+                                <span class="fa fa-anchor solo">CSS Syntax</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="css-borders.html">
+                                <span class="fa fa-anchor solo">CSS Borders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-tables.html">
+                                <span class="fa fa-anchor solo">CSS Tables</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-boxModel.html">
+                                <span class="fa fa-anchor solo">CSS Box Model</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-color.html">
+                                <span class="fa fa-anchor solo">CSS Color</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-background.html">
+                                <span class="fa fa-anchor solo">CSS Background</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Page content -->
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h2>CSS Introduction</h2>
+                                        <a href="#"><button type="button" class="btn">Previous</button></a>
+                                        <a href="../css/css-syntax.html"><button type="button" class="btn" style="float:right;">Next</button></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <!-- <div class="w3-panel w3-sand w3-serif"> -->
+                                        <div class="w3-panel">    
+                                            <h3>What is CSS?</h3>
+                                            <ul>
+                                                <li><b>CSS</b> stands for <b>C</b>ascading <b>S</b>tyle <b>S</b>heets</li>
+                                                <li>CSS describes <b>how HTML elements are to be displayed on screen, paper, or in other media</b></li>
+                                                <li>CSS <b>saves a lot of work</b>. It can control the layout of multiple web pages all at once</li>
+                                                <li>External stylesheets are stored in <b>CSS files</b></li>
+                                            </ul>
+                                            <p>If you want to study these subjects first, find the tutorials on our <a href="">home page</a>.</p>
+                                            <h3>CSS Solved a Big Problem</h3>
+                                            <p>HTML was never intended to contain tags for formatting a document.</p>
+                                            <p>HTML was intended to define the content of a document, like:</p>
+                                            <xmp><h1>This is a heading</h1></xmp>
+                                            <xmp><p>This is a paragraph.</p></xmp>
+                                            When tags like<xmp><font></font></xmp>, and color attributes were added to the HTML 3.2 specification, it started a nightmare for web developers. Development of large websites, where fonts and color information were added to every single page, became a long and expensive process.<br><br>
+                                                    
+                                            To solve this problem, the World Wide Web Consortium (W3C) created CSS.<br><br>
+                                                    
+                                            CSS removed the style formatting from the HTML page!<br><br>
+            
+                                            All browsers support CSS today.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+                
+        <script>
+            /*Menu-toggle*/
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+                
+            });
+        </script>
+    </body>
+</html>
+

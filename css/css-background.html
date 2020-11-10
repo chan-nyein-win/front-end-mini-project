@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Background</title>
+        <link rel="stylesheet" href="../template/w3.css">
+        <link rel="stylesheet" href="../template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../template/codemirror.css">
+        <!-- <link rel="stylesheet" href="./template/primary-unified.css"> -->
+        <link rel="stylesheet" href="../template/codemirror-5.40.2/lib/codemirror.css">
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../template/run_prettify.js"></script>
+        <style>
+            #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 300px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 300px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 50px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: #ffffc6;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c;
+                word-wrap: break-word;
+            }
+            .bgResponsive{
+                width:100%;
+                height:320px;
+                border:1px solid gray;
+                padding:8px;
+                background:#e1efbb url(../images/workspace_background-wallpaper-1366x768.jpg);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            .nav>li>a:focus, .nav>li>a:hover {
+                text-decoration: none !important;
+                background-color: rgba(223, 240, 216,0.3)!important;
+            }
+
+            @media (max-width:767px) {
+
+                #wrapper {
+                padding-left: 0;
+                }
+
+                #sidebar-wrapper {
+                left: 0;
+                }
+
+                #wrapper.active {
+                    position: relative;
+                    left: 250px;
+                }
+
+                #wrapper.active #sidebar-wrapper {
+                    left: 250px;
+                    width: 300px;
+                    transition: all 0.4s ease 0s;
+                }
+
+                #menu-toggle {
+                    display: inline-block;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="aa" >
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+                        <div  class="navbar-brand">
+                            <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <!-- <a href="#">Project name</a> -->
+                        </div>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse ">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../index.html">Home</a>
+                            </li>
+                            <li><a href="../html/Html_home.html">HTML</a></li>
+                            <li><a href="../css/css-Introduction.html">CSS</a></li>
+                            <li><a href="#script">JAVASCRIPT</a></li>
+                            <li><a href="#about">JQUERY</a></li>
+                            <li><a href="#about">BOOTSTRAP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <nav id="spy">
+                    <ul class="sidebar-nav nav">
+                        <li>
+                            <a href="css-Introduction.html">
+                                <span class="fa fa-home solo">CSS Introduction</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-syntax.html">
+                                <span class="fa fa-anchor solo">CSS Syntax</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="css-borders.html">
+                                <span class="fa fa-anchor solo">CSS Borders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-tables.html">
+                                <span class="fa fa-anchor solo">CSS Tables</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-boxModel.html">
+                                <span class="fa fa-anchor solo">CSS Box Model</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-color.html">
+                                <span class="fa fa-anchor solo">CSS Color</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-background.html">
+                                <span class="fa fa-anchor solo">CSS Background</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Page content -->
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h2>CSS Backgrounds</h2>
+                                        <a href="../css/css-color.html"><button type="button" class="btn">Previous</button></a>
+                                        <a href="#"><button type="button" class="btn" style="float:right;">Previous</button></a>
+                                    </div>
+                                    <div class="panel-body ">
+                                        <div class="bgResponsive">
+                                            <p><b>The CSS background properties are used to define the background effects for elements.</b></p>
+                                            <p>CSS background properties:</p>
+                                            <ul>
+                                                <li>background-color</li>
+                                                <li>background-image</li>
+                                                <li>background-repeat</li>
+                                                <li>background-attachment</li>
+                                                <li>background-position</li>
+                                            </ul>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Background Color</h3>
+                                            <p>The <span style="color:red">background-color</span> property specifies the background color of an element.</p><br>
+                                            <p>The background color of a page is set like this:</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body<span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-color</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">lightblue</span> 
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}
+                                                </span>        
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-color_body">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>With CSS, a color is most often specified by:</p>
+                                            <ul>
+                                                <li>a valid color name - like "red"</li>
+                                                <li>a HEX value - like "#ff0000"</li>
+                                                <li>an RGB value - like "rgb(255,0,0)"</li>
+                                            </ul>
+                                            <p>In the example below, the <span style="color:black">< <span style="color:black">h1</span><span style="color:black"> ></span></span>
+                                            <span style="color:black">< <span style="color:black">p</span><span style="color:black"> ></span></span>
+                                            <span style="color:black">< <span style="color:black">div</span><span style="color:black"> ></span></span> elements have different background colors:</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    h1<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-color</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">green</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span><br><br>
+        
+                                                    div<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-color</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">lightblue</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;  
+                                                    <span style="color:black">}</span><br><br>
+        
+                                                    p<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-color</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">yellow</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-color_elements">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Background Image</h3>
+                                            <p>The background-image property specifies an image to use as the background of an element.</p><br>
+                                            <p>By default, the image is repeated so it covers the entire element.</p><br>
+                                            <p>The background image for a page can be set like this:</p><br>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-image</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">url("paper.gif")</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-image">Try it Yourself »</a>  
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>Below is an example of a <b>bad</b> combination of text and background image. The text is hardly readable:</p>     
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-image</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">url("bgdesert.jpg")</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-image_bad">Try it Yourself »</a> 
+                                        </div>
+                                        <div class="w3-panel w3-note">
+                                            <p><strong>Note : </strong> When using a background image, use an image that does not disturb the text.</p>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Background Image - Repeat Horizontally or Vertically</h3>   
+                                            <p>By default, the <span style="color:red">background-image</span> property repeats an image both horizontally and vertically.</p>
+                                            <P>Some images should be repeated only horizontally or vertically, or they will look strange, like this:</P>      
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body<span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-image</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">url("gradient_bg.png")</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-image_gradient1">Try it Yourself »</a> 
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>If the image above is repeated only horizontally <span style="color:black">(</span><span style="color:red">background-repeat : repeat-x;</span><span style="color:black">)</span>, the background will look better:</p>
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-image</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">url("gradient_bg.png")</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">background-repeat</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">repeat-x</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-image_gradient2">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel w3-note">
+                                            <p><strong>Tip : </strong> To repeat an image vertically, set <span style="color:red">background-repeat: repeat-y;</span></p>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Background Image - Set position and no-repeat</h3>   
+                                            <p>Showing the background image only once is also specified by the <span style="color:red">background-repeat</span> property:</P>      
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-image</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">url("img_tree.png")</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">background-repeat</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">no-repeat</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-image_norepeat">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>In the example above, the background image is shown in the same place as the text. We want to change the position of the image, so that it does not disturb the text too much.</p><br>
+                                            <p>The position of the image is specified by the <span style="color:red">background-position</span> property:</P>      
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-image</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">url("img_tree.png")</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">background-repeat</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">no-repeat</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-position</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">right top</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:black">}</span><br><br>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-image_position">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Background Image - Fixed position</h3>
+                                            <p>To specify that the background image should be fixed (will not scroll with the rest of the page), use the <span style="color:red">background-attachment</span> property:</P>      
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-image</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">url("img_tree.png")</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">background-repeat</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">no-repeat</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-position</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">right top</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-attachment</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">fixed</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:black">}</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background-image_attachment">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Background - Shorthand property</h3>
+                                            <P>To shorten the code, it is also possible to specify all the background properties in one single property. This is called a shorthand property.</P>
+                                            <p>The shorthand property for background is <span style="color:red">background</span>:</P>      
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    body <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">#ffffff url("img_tree.png") no-repeat right top</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span><br><br>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_background_shorthand">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>When using the shorthand property the order of the property values is:</P>
+                                            <ul>
+                                                <li><span style="color:red">background-color</span></li>
+                                                <li><span style="color:red">background-image</span></li>
+                                                <li><span style="color:red">background-repeat</span></li>
+                                                <li><span style="color:red">background-attachment</span></li>
+                                                <li><span style="color:red">background-position</span></li>
+                                            </ul> 
+                                            <p>It does not matter if one of the property values is missing, as long as the other ones are in this order.</p>        
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div> 
+                        </div>
+                    </div>              
+                </div>
+            </div> 
+            <script>
+                /*Menu-toggle*/
+                $("#menu-toggle").click(function(e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("active");
+                    
+                });
+            </script>
+        </body>
+        </html>                  
+                                    
+                                    
+                                    
+                                   
+                                     
+                                    
+                                    
+                                     
+                                     
+                                    
+                                    
+                                     
+                                     
+                                    
+                                     
+                                     
+                                    
+                                    
+                                
+                            
+                              
+                        
+                    
+            
+       
+                
+        
+

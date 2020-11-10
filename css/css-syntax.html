@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>CSS Syntax</title>
+
+        <link rel="stylesheet" href="../template/w3.css">
+        <link rel="stylesheet" href="../template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../template/codemirror.css">
+        <!-- <link rel="stylesheet" href="./template/primary-unified.css"> -->
+        <link rel="stylesheet" href="../template/codemirror-5.40.2/lib/codemirror.css">
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../template/run_prettify.js"></script>
+        <style>
+            /* #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 250px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 250px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 20px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: none;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c !important;
+                word-wrap: break-word;
+            }
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            @media (max-width:767px) {
+
+                #wrapper {
+                padding-left: 0;
+                }
+
+                #sidebar-wrapper {
+                left: 0;
+                }
+
+                #wrapper.active {
+                    position: relative;
+                    left: 250px;
+                }
+
+                #wrapper.active #sidebar-wrapper {
+                    left: 250px;
+                    width: 250px;
+                    transition: all 0.4s ease 0s;
+                }
+
+                #menu-toggle {
+                    display: inline-block;
+                }
+
+            }  */
+            #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 300px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 300px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 50px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: #ffffc6;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c;
+                word-wrap: break-word;
+            }
+           
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            .nav>li>a:focus, .nav>li>a:hover {
+                text-decoration: none !important;
+                background-color: rgba(223, 240, 216,0.3)!important;
+            }
+
+            @media (max-width:767px) {
+
+                #wrapper {
+                padding-left: 0;
+                }
+
+                #sidebar-wrapper {
+                left: 0;
+                }
+
+                #wrapper.active {
+                    position: relative;
+                    left: 250px;
+                }
+
+                #wrapper.active #sidebar-wrapper {
+                    left: 250px;
+                    width: 300px;
+                    transition: all 0.4s ease 0s;
+                }
+
+                #menu-toggle {
+                    display: inline-block;
+                }
+
+            }
+        </style>
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="aa" >
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button> -->
+                        <div  class="navbar-brand">
+                            <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <!-- <a href="#">Project name</a> -->
+                        </div>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse ">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../index.html">Home</a>
+                            </li>
+                            <li><a href="../html/Html_home.html">HTML</a></li>
+                            <li><a href="../css/css-Introduction.html">CSS</a></li>
+                            <li><a href="#javascript">JAVASCRIPT</a></li>
+                            <li><a href="#about">JQUERY</a></li>
+                            <li><a href="#about">BOOTSTRAP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <nav id="spy">
+                    <ul class="sidebar-nav nav">
+                        <li>
+                            <a href="css-Introduction.html">
+                                <span class="fa fa-home solo">CSS Introduction</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-syntax.html">
+                                <span class="fa fa-anchor solo">CSS Syntax</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="css-borders.html">
+                                <span class="fa fa-anchor solo">CSS Borders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-tables.html">
+                                <span class="fa fa-anchor solo">CSS Tables</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-boxModel.html">
+                                <span class="fa fa-anchor solo">CSS Box Model</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-color.html">
+                                <span class="fa fa-anchor solo">CSS Color</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-background.html">
+                                <span class="fa fa-anchor solo">CSS Background</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Page content -->
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                       <h2>CSS Syntax and Selectors</h2>
+                                       <a href="../css/css-Introduction.html"><button type="button" class="btn">Previous</button></a>
+                                       <a href="../css/css-borders.html"><button type="button" class="btn" style="float:right;">Next</button></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="w3-panel">
+                                           <h3>CSS Syntax</h3>
+                                           <p>A CSS rule-set consists of a selector and a declaration block:</p><br>
+                                           <img src="../images/selector.gif" alt="Selector" class="responsive" width="700" height="400"><br>
+                                           <p>The selector points to the HTML element you want to style.</p>
+                                           
+                                           <p>The declaration block contains one or more declarations separated by semicolons.</p>
+                                           
+                                           <p>Each declaration includes a CSS property name and a value, separated by a colon.</p>
+                                           
+                                           <p>A CSS declaration always ends with a semicolon, and declaration blocks are surrounded by curly braces.</p>
+
+                                           <p>In the following example all elements will be center-aligned, with a red text color:</p>
+
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p<span style="color:black"> { </span>
+                                                    <span style="color:red">color</span>
+                                                    <span style="color:black"> : </span> 
+                                                    <span style="color:blue"> red</span> 
+                                                    <span style="color:black"> ;</span><br>&nbsp;&nbsp;&nbsp;  
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black"> : </span>
+                                                    <span style="color:blue"> center</span> 
+                                                    <span style="color:black"> ;</span><br>&nbsp;&nbsp;  
+                                                    <span style="color:black"> }</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax1">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>CSS Selectors</h3>
+                                            <p>CSS selectors are used to "find" (or select) HTML elements based on their element name, id, class, attribute, and more.</p>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>The element Selector</h3>
+                                            <p>The element selector selects elements based on the element name.</p><br>
+                                            <p>You can select all<span style="color:black">< <span style="color:black">p</span><span style="color:black"> ></span></span> on a page like this (in this case, all<span style="color:black">< <span style="color:black">p</span><span style="color:black"> ></span></span>elements will be center-aligned, with a red text color):</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p<span style="color:black"> { </span>
+                                                    <span style="color:red">color</span>
+                                                    <span style="color:black"> : </span> 
+                                                    <span style="color:blue"> red</span> 
+                                                    <span style="color:black"> ;</span><br>&nbsp;&nbsp;&nbsp;  
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black"> : </span>
+                                                    <span style="color:blue"> center</span> 
+                                                    <span style="color:black"> ;</span><br>&nbsp;&nbsp;  
+                                                    <span style="color:black"> }</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax1">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>The id Selector</h3>
+                                            <p>The id selector uses the id attribute of an HTML element to select a specific element.</p>
+                                                    
+                                            <p>The id of an element should be unique within a page, so the id selector is used to select one unique element!</p>        
+                                                    
+                                            <p>To select an element with a specific id, write a hash (#) character, followed by the id of the element.</p>        
+                                                    
+                                            <p>The style rule below will be applied to the HTML element with id="para1":</p><br>
+                                           
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    #para1<span style="color:black"> { </span>
+                                                    <span style="color:red">color</span>
+                                                    <span style="color:black"> : </span> 
+                                                    <span style="color:blue"> red</span> 
+                                                    <span style="color:black"> ;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black"> : </span>
+                                                    <span syle="color:blue"> center</span> 
+                                                    <span style="color:black"> ;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                                                    <span style="color:black"> }</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax_id">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel w3-note">
+                                            <p><strong>Note : </strong> "An id name cannot start with a number!"</p>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>The class Selector</h3>
+                                            <p>The class selector selects elements with a specific class attribute.</p>
+                                                    
+                                            <p>To select elements with a specific class, write a period (.) character, followed by the name of the class.</p>        
+                                                    
+                                            <p>In the example below, all HTML elements with class="center" will be red and center-aligned:</p>        
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    .center<span style="color:black"> { </span>
+                                                    <span style="color:red">color</span>
+                                                    <span style="color:black"> : </span> 
+                                                    <span style="color:blue"> red</span> 
+                                                    <span style="color:black"> ;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black"> : </span>
+                                                    <span style="color:blue"> center</span> 
+                                                    <span style="color:black"> ;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                                                    <span style="color:black"> }</span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax_class">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>HTML elements can also refer to more than one class.</p>
+                                                                   
+                                            <p>In the example below, the <span style="color:black">< <span style="color:black">p</span><span style="color:black"> ></span></span> element will be styled according to class="center" and to class="large":</p>        
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    <<span style="color:red">class</span>
+                                                    <span style="color:blue">=</span>
+                                                    <span style="color:blue">"</span> 
+                                                    <span style="color:blue">center</span> 
+                                                    <span style="color:blue">large</span>  
+                                                    <span style="color:blue">"</span>
+                                                    <span style="color:blue">></span>
+                                                    <span style="color:black">This paragraph refers to two classes.</span> 
+                                                    <span style="color:blue"><</span>  
+                                                    <span style="color:brown">/p</span>
+                                                    <span style="color:blue">></span>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax_class">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel w3-note">
+                                            <p><strong>Note : </strong> "A class name cannot start with a number!"</p>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Grouping Selectors</h3>
+                                            <p>If you have elements with the same style definitions, like this:</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    h1<span style="color:black">{</span>
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">center</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">color</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">red</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;  
+                                                    <span style="color:black">}</span><br><br>
+                                
+                                                    <!-- for h2 -->
+                                                    h2<span style="color:black">{</span>
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">center</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">color</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">red</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;  
+                                                    <span style="color:black">}</span><br><br>
+                                                         
+                                                    <!-- For p -->
+                                                    p<span style="color:black">{</span>
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">center</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">color</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">red</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;  
+                                                    <span style="color:black">}</span><br><br>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <p>It will be better to group the selectors, to minimize the code.</p><br>
+                                            <p>To group selectors, separate each selector with a comma.</p><br>
+                                            <p>In the example below we have grouped the selectors from the code above:</p><br>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    h1<span style="color:brown">,</span>
+                                                    <span style="color:brown">h2</span>
+                                                    <span style="color:brown">,</span> 
+                                                    <span style="color:brown">p</span> 
+                                                    <span style="color:black">{</span> 
+                                                    <span style="color:red">color</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">red</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">text-align</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">center</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:black">}</span><br><br>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_grouping">Try it Yourself »</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+                
+        <script>
+            /*Menu-toggle*/
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+                
+            });
+        </script>
+    </body>
+</html>
+

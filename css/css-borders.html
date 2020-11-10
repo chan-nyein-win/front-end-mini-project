@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Borders</title>
+
+        <link rel="stylesheet" href="../template/w3.css">
+        <link rel="stylesheet" href="../template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../template/codemirror.css">
+        <!-- <link rel="stylesheet" href="./template/primary-unified.css"> -->
+        <link rel="stylesheet" href="../template/codemirror-5.40.2/lib/codemirror.css">
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../template/run_prettify.js"></script>
+        <style>
+            
+            #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 300px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 300px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 50px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: #ffffc6;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c;
+                word-wrap: break-word;
+            }
+           
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            .nav>li>a:focus, .nav>li>a:hover {
+                text-decoration: none !important;
+                background-color: rgba(223, 240, 216,0.3)!important;
+            }
+
+            @media (max-width:767px) {
+
+                #wrapper {
+                padding-left: 0;
+                }
+
+                #sidebar-wrapper {
+                left: 0;
+                }
+
+                #wrapper.active {
+                    position: relative;
+                    left: 250px;
+                }
+
+                #wrapper.active #sidebar-wrapper {
+                    left: 250px;
+                    width: 300px;
+                    transition: all 0.4s ease 0s;
+                }
+
+                #menu-toggle {
+                    display: inline-block;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="aa" >
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+                        <div  class="navbar-brand">
+                            <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse ">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../index.html">Home</a>
+                            </li>
+                            <li><a href="../html/Html_home.html">HTML</a></li>
+                            <li><a href="../css/css-Introduction.html">CSS</a></li>
+                            <li><a href="#javascript">JAVASCRIPT</a></li>
+                            <li><a href="#about">JQUERY</a></li>
+                            <li><a href="#about">BOOTSTRAP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <nav id="spy">
+                    <ul class="sidebar-nav nav">
+                        <li>
+                            <a href="css-Introduction.html">
+                                <span class="fa fa-home solo">CSS Introduction</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-syntax.html">
+                                <span class="fa fa-anchor solo">CSS Syntax</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="css-borders.html">
+                                <span class="fa fa-anchor solo">CSS Borders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-tables.html">
+                                <span class="fa fa-anchor solo">CSS Tables</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-boxModel.html">
+                                <span class="fa fa-anchor solo">CSS Box Model</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-color.html">
+                                <span class="fa fa-anchor solo">CSS Color</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-background.html">
+                                <span class="fa fa-anchor solo">CSS Background</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Page content -->
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h2>CSS Borders</h2>
+                                        <a href="../css/css-syntax.html"><button type="button" class="btn">Previous</button></a>
+                                        <a href="../css/css-tables.html"><button type="button" class="btn" style="float:right;">Next</button></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="w3-panel">
+                                            <h3>CSS Border Properties</h3>
+                                            <p>The CSS <span style="color:red">border</span> properties allow you to specify the style, width, and color of an element's border.</p>
+                                            <div class="w3-container w3-border w3-border-black w3-margin-top">
+                                                <p>I have borders on all sides.</p>
+                                            </div><br>
+                                            <div class="w3-container w3-border-bottom w3-border-red">
+                                                <p>I have borders on all sides.</p>
+                                            </div><br>
+                                            <div class="w3-container w3-border w3-round-xlarge">
+                                                <p>I have borders on all sides.</p>
+                                            </div><br>
+                                            <div class="w3-container w3-pale-blue w3-leftbar w3-border-blue">
+                                                <p>I have borders on all sides.</p>
+                                            </div><br><br>
+                                            
+                                            <h3>Border Style</h3>
+                                            <p>The <span style="color:red">border-style</span> property specifies what kind of border to display.</p><br>
+                                            <p>The following values are allowed:</p>
+                                            <uL>
+                                                <li><span style="color:red">dotted </span> - Defines a dotted border</li>
+                                                <li><span style="color:red">dashed</span> - Defines a dashed border</li>
+                                                <li><span style="color:red">solid</span> - Defines a solid border</li>
+                                                <li><span style="color:red">double</span> - Defines a double border</li>
+                                                <li><span style="color:red">groove</span> - Defines a 3D grooved border. The effect depends on the border-color value</li>
+                                                <li><span style="color:red">ridge</span> - Defines a 3D ridged border. The effect depends on the border-color value</li>
+                                                <li><span style="color:red">inset</span> - Defines a 3D inset border. The effect depends on the border-color value</li>
+                                                <li><span style="color:red">outset</span> - Defines a 3D outset border. The effect depends on the border-color value</li>
+                                                <li><span style="color:red">none</span> - Defines no border</li>
+                                                <li><span style="color:red">hidden</span> - Defines a hidden border</li>
+                                            </uL><br>
+                                            <p>The <span style="color:red">border-style</span> property can have from one to four values (for the top border, right border, bottom border, and the left border).</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p.dotted<span style="color:black"> {</span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">dotted</span> 
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.dashed</span>
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:red">border-style</span> 
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">dashed</span>
+                                                    <span style="color:black">;</span> 
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.solid </span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">solid</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.double </span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">double</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.groove</span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">groove</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.ridge</span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">ridge</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.inset</span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">inset</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.outset</span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">outset</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.none</span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">none</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.hidden </span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">hidden</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.mix </span> 
+                                                    <span style="color:black">{</span>
+                                                    <span style="color:black"></span>
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">dotted dashed solid double</span>
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                </span>
+                                            </div> 
+                                        </div> 
+                                        <div class="w3-white w3-padding nottranslate">
+                                            <p style="border-style:dotted;">A dotted border.</p><br>
+                                            <p style="border-style:dashed;">A dashed border.</p><br>
+                                            <p style="border-style:solid;">A solid border.</p><br>
+                                            <p style="border-style:double;">A double border.</p><br>
+                                            <p style="border-style:groove;">A groove border.The effect depends on the border-color value.</p><br>
+                                            <p style="border-style:ridge;">A ridge border.The effect depends on the border-color value.</p><br>
+                                            <p style="border-style:inset;">An inset border. The effect depends on the border-color value.</p><br>
+                                            <p style="border-style:outset;">An outset border. The effect depends on the border-color value.</p><br>
+                                            <p style="border-style:none;">No border.</p><br>
+                                            <p style="border-style:hidden;">A hidden border.</p><br>
+                                            <p style="border-style:dotted dashed solid double;">A mixed border.</p><br>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border-style">Try it Yourself »</a>
+                                        
+                                        </div> 
+                                        <div class="w3-panel w3-note">
+                                            <p><strong>Note : </strong> None of the OTHER CSS border properties described below will have ANY effect unless the border-style property is set!</p>
+                                        </div> 
+                                        <div class="w3-panel">
+                                            <h3>Border Width</h3>
+                                            <p>The <span style="color:red">border-width</span> property specifies the width of the four borders.</p><br>
+                                            <p>The width can be set as a specific size (in px, pt, cm, em, etc) or by using one of the three pre-defined values: thin, medium, or thick.</p><br>
+                                            <p>The <span style="color:red">border-width</span> property can have from one to four values (for the top border, right border, bottom border, and the left border).</p>
+                                            <div style="border:5px solid black;padding:8px;">5px border-width</div>
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p.one<span style="color:black"> { </span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">solid</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-width</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">5px</span> 
+                                                    <span style="color:black">;</span><br>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.two</span> 
+                                                    <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">solid</span>
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-width</span>
+                                                    <span style="color:blue">medium</span>
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}</span><br> 
+                                                    <span style="color:brown">p.three</span> 
+                                                    <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">solid</span>
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-width</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">2px 10px 4px 20px</span>
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}</span><br>   
+                                                </span>
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border-width">Try it Yourself »</a>  
+                                        </div> 
+                                        <div class="w3-panel">
+                                            <h3>Border Color</h3>
+                                            <p>The border-color property is used to set the color of the four borders.</p>
+                                            <p>The color can be set by:</p>
+                                            <ul>
+                                                <li>name - specify a color name, like "red"</li>
+                                                <li>Hex - specify a hex value, like "#ff0000"</li>
+                                                <li>RGB - specify a RGB value, like "rgb(255,0,0)"</li>
+                                                <li>transparent</li>
+                                            </ul>
+                                            <p>The <span style="color:red">border-color</span> property can have from one to four values (for the top border, right border, bottom border, and the left border). </p>
+                                            <p>If <span style="color:red">border-color</span> is not set, it inherits the color of the element.</p><br>
+
+                                            <div style="border:5px solid red;padding:8px;">Red border</div>
+
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p.one<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">solid</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-color</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">red</span> 
+                                                    <span style="color:black">;</span><br>
+                                                    <span style="color:black">}</span><br>
+                                                    <span style="color:brown">p.two</span> 
+                                                    <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">solid</span>
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-color</span>
+                                                    <span style="color:blue">green</span>
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}</span><br> 
+                                                    <span style="color:brown">p.three</span> 
+                                                    <span style="color:black">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">solid</span>
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-color</span>
+                                                    <span style="color:blue">red green blue yellow</span>
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}</span><br>
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border-color1">Try it Yourself »</a>  
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Border - Individual Sides</h3>
+                                            <p>From the examples above you have seen that it is possible to specify a different border for each side.</p><br>
+                                            <p>In CSS, there are also properties for specifying each of the borders (top, right, bottom, and left):</p>
+                                            <div style="border-style: dotted solid;padding:8px;">Different Border Styles</div>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-top-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">dotted</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-right-style</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">solid</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp; 
+                                                    <span style="color:red">border-bottom-style</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">dotted</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-left-style</span>
+                                                    <span style="color:black">:</span>
+                                                    <span style="color:blue">solid</span> 
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}</span> 
+                                                </span>
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border-side">Try it Yourself »</a> 
+                                        </div>  
+                                        <div class="w3-panel">
+                                            <p>The example above gives the same result as this:</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p<span style="color:black"> {</span><br>&nbsp;&nbsp;
+                                                    <span style="color:red">border-style</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">dotted solid</span> 
+                                                    <span style="color:black">;</span><br> 
+                                                    <span style="color:black">}</span><br> 
+                                                </span>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border-side2">Try it Yourself »</a> 
+                                        </div>   
+                                        <div class="w3-panel">
+                                            <p>If the <span style="color:red">border-style</span> property has four values:</p><br>
+                                            <ul>
+                                                <li><b>border-style: dotted solid double dashed;</b></li>
+                                                <ul>
+                                                    <li>top border is dotted</li>
+                                                    <li>right border is solid</li>
+                                                    <li>bottom border is double</li>
+                                                    <li>left border is dashed</li>
+                                                </ul>
+                                            </ul><br>
+                                            <p>If the <span style="color:red">border-style</span> property has three values:</p>
+                                            <ul>
+                                                <li><b>border-style: dotted solid double;</b></li>
+                                                <ul>
+                                                    <li>top border is dotted</li>
+                                                    <li>right and left borders are solid</li>
+                                                    <li>bottom border is double</li>
+                                                </ul>
+                                            </ul><br>
+                                            <p>If the <span style="color:red">border-style</span> property has two values:</p>
+                                            <ul>
+                                                <li><b>border-style: dotted solid;</b></li>
+                                                <ul>
+                                                    <li>top and bottom borders are dotted</li>
+                                                    <li>right and left borders are solid</li>
+                                                </ul>
+                                            </ul><br>
+                                            <p>If the <span style="color:red">border-style</span> property has one value:</p>
+                                            <ul>
+                                                <li><b>border-style: dotted;</b></li>
+                                                <ul>
+                                                    <li>all four borders are dotted</li>
+                                                </ul>
+                                            </ul><br>
+                                            <p>The <span style="color:red">border-style</span> property is used in the example above. However, it also works with <span style="color:red">border-width</span> and <span style="color:red">border-color</span>.</p><br><hr>
+                                            <h3>Border - Shorthand Property</h3>
+                                            <p>As you can see from the examples above, there are many properties to consider when dealing with borders.</p>
+                                            <p>To shorten the code, it is also possible to specify all the individual border properties in one property.</p>
+                                            <p>The <span style="color:red">border</span> property is a shorthand property for the following individual border properties:</p>
+                                            <ul>
+                                                <li><span style="color:red">border-width</span></li>
+                                                <li><span style="color:red">border-style</span>(required)</li>
+                                                <li><span style="color:red">border-color</span></li>
+                                            </ul>
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p<span style="color:black"> {</span>
+                                                    <span style="color:red">border</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">5px solid red</span> 
+                                                    <span style="color:black">;</span>
+                                                    <span style="color:black">}</span><br>
+                                                </span>
+                                                </span>
+                                            </div>   
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border">Try it Yourself »</a>  
+                                        </div> 
+                                        <div class="w3-panel">
+                                            <h3>Result</h3>
+                                            <p style="border:5px solid red;padding:2px">Some text</p>
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Left Border</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-left</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">6px solid red</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-color</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">lightgrey</span> 
+                                                    <span style="color:black">;</span><br>
+                                                    <span style="color:black">}</span><br>
+                                                </span>
+                                            </div>   
+                                        </div> 
+                                        <div class="w3-panel">
+                                            <h3>Result</h3>
+                                            <p style="border-left:6px solid red;padding:5px 5px;background-color: lightgrey">Some text</p><br>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border_left">Try it Yourself »</a>
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Bottom Border</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-bottom</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">6px solid red</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">background-color</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">lightgrey</span> 
+                                                    <span style="color:black">;</span><br>
+                                                    <span style="color:black">}</span><br>
+                                                </span>
+                                            </div>   
+                                        </div> 
+                                        <div class="w3-panel">
+                                            <h3>Result</h3>
+                                            <p style="border-bottom:6px solid red;padding:5px 5px;background-color: lightgrey">Some text</p><br>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border_bottom">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Rounded Borders</h3>
+                                            <p>The <span style="color:red">border-radius</span> property is used to add rounded borders to an element:</p><br>
+                                            <p style="border:2px solid red;padding:2px;">Normal Border</p><br>
+                                            <p style="border:2px solid red;border-radius: 5px;padding: 2px;">Round border</p><br>
+                                            <p style="border:2px solid red;border-radius: 12px;padding: 2px;">Roundest border</p>
+                                            <p></p>
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Bottom Border</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:brown">
+                                                    p<span style="color:black"> {</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">2px solid red</span> 
+                                                    <span style="color:black">;</span><br>&nbsp;&nbsp;&nbsp;
+                                                    <span style="color:red">border-radius</span>
+                                                    <span style="color:black">:</span> 
+                                                    <span style="color:blue">5px</span> 
+                                                    <span style="color:black">;</span><br>
+                                                    <span style="color:black">}</span><br>
+                                                </span>
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_border_round">Try it Yourself »</a>   
+                                        </div> 
+                                        <div class="w3-panel">
+                                            <p><b>Note:</b>The <span style="color:red">border-radius</span> property is not supported in IE8 and earlier versions.</p>
+                                        </div>                                         
+                                    </div>
+                                </div>
+                            </div>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+                
+        <script>
+            /*Menu-toggle*/
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+                
+            });
+        </script>
+    </body>
+</html>
+

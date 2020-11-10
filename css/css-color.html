@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>CSS Colors</title>
+    
+        <link rel="stylesheet" href="../template/w3.css">
+        <link rel="stylesheet" href="../template/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../template/codemirror.css">
+        <!-- <link rel="stylesheet" href="./template/primary-unified.css"> -->
+        <link rel="stylesheet" href="../template/codemirror-5.40.2/lib/codemirror.css">
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+        <script src="../template/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../template/run_prettify.js"></script>
+        <script src="../template/w3color-master/w3color.js"></script>
+
+        <style>
+            #wrapper {
+                padding-left: 250px;
+                transition: all 0.4s ease 0s;
+            }
+            #aa{
+                background-color: #284f5c !important;
+            }
+
+            #sidebar-wrapper {
+                margin-left: -300px;
+                top: 51px;
+                left: 250px;
+                width: 300px;
+                background: #284f5c;
+                position: fixed;
+                height: 100%;
+                overflow-y: auto;
+                z-index: 1000;
+                transition: all 0.4s ease 0s;
+            }
+
+            #wrapper.active {
+                padding-left: 0;
+            }
+
+            #wrapper.active #sidebar-wrapper {
+                left: 0;
+            }
+
+            #page-content-wrapper {
+                width: 100%;
+                padding-top: 80px;
+                transition: all 0.4s ease 0s;
+            }
+            .btn{
+                background-color: #489bb4;
+                width: 75px;
+                color: white;
+
+            }
+            .btn:hover{
+                background-color:white;
+                width: 75px;
+                color: #489bb4;
+
+            }
+            .sidebar-nav {
+                position: absolute;
+                top: 0;
+                width: 300px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidebar-nav li {
+                line-height: 40px;
+                text-indent: 50px;
+            }
+
+            .sidebar-nav li a {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                padding-left: 60px;
+            }
+
+            .sidebar-nav li a span:before {
+                position: absolute;
+                left: 0;
+                color: #41484c;
+                text-align: center;
+                width: 20px;
+                line-height: 18px;
+            }
+
+            .sidebar-nav li a:hover,
+            .sidebar-nav li.active {
+                color: #fff;
+                background: #284f5c;
+                text-decoration: none;
+            }
+
+            .sidebar-nav li a:active,
+            .sidebar-nav li a:focus {
+                text-decoration: none;
+            }
+
+            .sidebar-nav > .sidebar-brand {
+                height: 65px;
+                line-height: 60px;
+                font-size: 18px;
+            }
+
+            .sidebar-nav > .sidebar-brand a {
+                color: #999999;
+            }
+
+            .sidebar-nav > .sidebar-brand a:hover {
+                color: #fff;
+                background: #ffffc6;
+            }
+            .responsive {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+            }
+            .w3-btn, .w3-btn:link, .w3-btn:visited {
+                color:#FFFFFF;
+                background-color:#284f5c;
+                text-decoration: none;
+            }
+            .w3-note{
+                background-color: #ffffcc;
+                border-left: 6px solid #ffeb3b;
+            }
+            .w3-example {
+                background-color: #f1f1f1;
+                padding: 0.01em 16px;
+                margin: 20px 0;
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+            }
+            .w3-code {
+                width: auto;
+                background-color: #fff;
+                padding: 8px 12px;
+                border-left: 4px solid #284f5c;
+                word-wrap: break-word;
+            }
+           
+            #menu-toggle {
+                text-decoration: none;
+                float: left;
+                color: #fff;
+                padding-right: 15px;
+            }
+            .nav>li>a:focus, .nav>li>a:hover {
+                text-decoration: none !important;
+                background-color: rgba(223, 240, 216,0.3)!important;
+            }
+
+            @media (max-width:767px) {
+
+                #wrapper {
+                padding-left: 0;
+                }
+
+                #sidebar-wrapper {
+                left: 0;
+                }
+
+                #wrapper.active {
+                    position: relative;
+                    left: 250px;
+                }
+
+                #wrapper.active #sidebar-wrapper {
+                    left: 250px;
+                    width: 300px;
+                    transition: all 0.4s ease 0s;
+                }
+
+                #menu-toggle {
+                    display: inline-block;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="aa" >
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+                        <div  class="navbar-brand">
+                            <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <!-- <a href="#">Project name</a> -->
+                        </div>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse ">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../index.html">Home</a>
+                            </li>
+                            <li><a href="../html/Html_home.html">HTML</a></li>
+                            <li><a href="../css/css-Introduction.html">CSS</a></li>
+                            <li><a href="#javascript">JAVASCRIPT</a></li>
+                            <li><a href="#about">JQUERY</a></li>
+                            <li><a href="#about">BOOTSTRAP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <nav id="spy">
+                    <ul class="sidebar-nav nav">
+                        <li>
+                            <a href="css-Introduction.html">
+                                <span class="fa fa-home solo">CSS Introduction</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-syntax.html">
+                                <span class="fa fa-anchor solo">CSS Syntax</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="css-borders.html">
+                                <span class="fa fa-anchor solo">CSS Borders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-tables.html">
+                                <span class="fa fa-anchor solo">CSS Tables</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-boxModel.html">
+                                <span class="fa fa-anchor solo">CSS Box Model</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-color.html">
+                                <span class="fa fa-anchor solo">CSS Color</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./css-background.html">
+                                <span class="fa fa-anchor solo">CSS Background</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Page content -->
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h2>CSS Colors</h2>
+                                        <a href="../css/css-imageGallery.html"><button type="button" class="btn">Previous</button></a>
+                                        <a href="../css/css-background.html"><button type="button" class="btn" style="float:right;">Next</button></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="w3-panel">
+                                            <p>Colors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values.</p>
+                                            <h3>Color Names</h3>
+                                            <p>In HTML, a color can be specified by using a color name:</p>
+                                            <div class="w3-row w3-center" style="margin:0 -16px; line-height:80px;color:white;">
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:tomato;">Tomato</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:orange;">Orange</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:dodgerblue">DodgerBlue</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:mediumseagreen;">MediumSeaGreen</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:gray;">Gray</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:violet;">Violet</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:lightgray;">LightGray</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:slateblue;">SlateBlue</div>
+                                                </div>
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_color_names">Try it Yourself »</a> 
+                                               
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Background Color</h3>
+                                            <p>You can set the background color for HTML elements:</p>
+                                            <div style="background-color:dodgerblue;text-align:center;color:white;font-size:24px;">Hello World</div><br>
+                                            <div class="w3-container" style="background-color:tomato;color:white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>    
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:blue">
+                                                    < <span style="color:brown">h1</span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="background-color:DodgerBlue;"></span> 
+                                                    <span style="color:black">Hello World</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue">></span><br><br>
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">p</span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="background-color:Tomato;"></span> 
+                                                    <span style="color:black">Lorem ipsum...</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/p</span>
+                                                    <span style="color:blue">></span> 
+                                                </span>  
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_color_background">Try it Yourself »</a>
+                                        </div>  
+                                        <div class="w3-panel">
+                                            <h3>Text Color</h3>
+                                            <p>You can set the color of text:</p>
+                                            <h3 style="color:tomato">Hello World</h3>
+                                            <p style="color:dodgerblue">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+                                            <p style="color:mediumseagreen">Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                                        </div>  
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:blue">
+                                                    <<span style="color:brown"> h1</span>&nbsp;
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="color:Tomato;"></span> 
+                                                    <span style="color:black">Hello World</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue">></span><br>
+                                                    <span style="color:blue"><</span> 
+                                                    <span style="color:brown">p </span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="color:DodgerBlue;"></span> 
+                                                    <span style="color:black">Lorem ipsum...</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/p</span>
+                                                    <span style="color:blue">></span><br>
+                                                    <span style="color:blue"><</span> 
+                                                    <span style="color:brown">p </span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="color:MediumSeaGreen;"></span> 
+                                                    <span style="color:black">Ut wisi enim...</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/p</span>
+                                                    <span style="color:blue">></span> 
+                                                </span>  
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_color_text">Try it Yourself »</a> 
+                                        </div>  
+                                        <div class="w3-panel">
+                                            <h3>Border Color</h3>
+                                            <p>You can set the color of borders:</p>
+                                            <h2 style="border: 2px solid Tomato;">Hello World</h2>
+                                            <h2 style="border: 2px solid dodgerblue;">Hello World</h2>
+                                            <h2 style="border: 2px solid violet;">Hello World</h2>
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:blue">
+                                                    <<span style="color:brown"> h1</span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="border:2px solid Tomato;"></span> 
+                                                    <span style="color:black">Hello World</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue"> > </span><br>
+                                                    <span style="color:blue"><</span> 
+                                                    <span style="color:brown">h1</span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="border:2px solid DodgerBlue;"></span> 
+                                                    <span style="color:black">Hello World</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue">></span><br>
+                                                    <span style="color:blue"><</span> 
+                                                    <span style="color:brown">h1 </span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="border:2px solid Violet;"></span> 
+                                                    <span style="color:black">Hello World</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue">></span> 
+                                                </span> 
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_color_border">Try it Yourself »</a>
+                                        </div>
+                                        <div class="w3-panel">
+                                            <h3>Color Values</h3>
+                                            <p>In HTML, colors can also be specified using RGB values, HEX values, HSL values, RGBA values, and HSLA values:</p><br>
+                                            
+                                            <p>Same as color name "Tomato":</p>
+                                            <div class="w3-row w3-center" style="margin:0 -16px; line-height:80px;color:white;">
+                                                <div class="w3-col 13 m12 w3-padding">
+                                                    <div style="background-color:rgb(255, 99, 71);">rgb(255, 99, 71)</div>
+                                                </div>
+                                                <div class="w3-col 13 m12 w3-padding">
+                                                    <div style="background-color:#ff6347">#ff6347</div>
+                                                </div>
+                                                <div class="w3-col 13 m12 w3-padding">
+                                                    <div style="background-color:hsl(9, 100%, 64%)">hsl(9, 100%, 64%)</div>
+                                                </div>
+                                            </div><br>   
+                                            <p>Same as color name "Tomato", but 50% transparent:</p><br> 
+                                            <div class="w3-row w3-center" style="margin:0 -16px; line-height:80px;color:white;">
+                                                <div class="w3-col 13 m12 w3-padding">
+                                                    <div style="background-color:rgba(255, 99, 71, 0.5);">rgba(255, 99, 71, 0.5)</div>
+                                                </div>
+                                                <div class="w3-col 13 m12 w3-padding">
+                                                    <div style="background-color:hsla(9, 100%, 64%, 0.5)">hsla(9, 100%, 64%, 0.5)</div>
+                                                </div>
+                                            </div><br>
+                                        </div> 
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-code nottranslate jsHigh">
+                                                <span style="color:blue">
+                                                    <<span style="color:brown"> h1</span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="background-color:rgb(255, 99, 71);"></span> 
+                                                    <span style="color:black">...</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue"> > </span><br>
+                                                    <span style="color:blue"><</span> 
+                                                    <span style="color:brown">h1</span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="background-color:#ff6347;></span> 
+                                                    <span style="color:black">...</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue">></span><br>
+                                                    <span style="color:blue"><</span> 
+                                                    <span style="color:brown">h1 </span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="background-color:hsl(9, 100%, 64%);"></span> 
+                                                    <span style="color:black">...</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue">></span><br><br>
+                                                    <span style="color:blue"><</span> 
+                                                    <span style="color:brown">h1</span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="background-color:rgba(255, 99, 71, 0.5);"></span> 
+                                                    <span style="color:black">...</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue">></span><br>
+                                                    <span style="color:blue"><</span> 
+                                                    <span style="color:brown">h1</span>
+                                                    <span style="color:red">style</span>
+                                                    <span style="color:blue">="background-color:hsla(9, 100%, 64%, 0.5);"></span> 
+                                                    <span style="color:black">...</span> 
+                                                    <span style="color:blue"><</span>
+                                                    <span style="color:brown">/h1</span>
+                                                    <span style="color:blue">></span>
+                                                </span>  
+                                            </div> 
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_color_values">Try it Yourself »</a>
+                                        </div>  
+                                        <div class="w3-panel">
+                                            <h3>RGB Value</h3>
+                                            <p>In HTML, a color can be specified as an RGB value, using this formula:</p>
+                                            <b>rgb(red,green,blue)</b><br><br>
+                                            <p>Each parameter (red, green, and blue) defines the intensity of the color between 0 and 255.</p><br>
+                                            <p>For example, rgb(255, 0, 0) is displayed as red, because red is set to its highest value (255) and the others are set to 0.</p><br>
+                                            <p>To display the color black, all color parameters must be set to 0, like this: rgb(0, 0, 0).</p><br>
+                                            <p>To display the color white, all color parameters must be set to 255, like this: rgb(255, 255, 255).</p><br>
+                                            <p>Experiment by mixing the RGB values below:</p>
+                                            <div class="w3-row w3-container">
+                                                <div class="w3-col m2 w3-container w3-center">
+                                                </div>
+                                                <div class="w3-col m8 w3-container w3-center">
+                                                <div id="rgbresult" style="font-size: 20px; font-weight: bold; font-family: Consolas,Courier New, Courier, monospace; line-height: 80px; background-color: rgb(255, 99, 71);"><p id="rgbresulttext" style="color: rgb(255, 255, 255);">rgb(255, 99, 71)</p></div>
+                                                </div>
+                                                <div class="w3-col m2 w3-container w3-center">
+                                                </div>
+                                            </div>
+                                            <!-- error -->
+                                            <div class="w3-row w3-container">
+                                                <div class="w3-col m4 w3-container w3-center">
+                                                <p>RED</p>
+                                                <input onchange="changeRGB()" oninput="changeRGB()" type="range" id="slideRed" name="slideRed" value="55" min="0" max="255">
+                                                <div id="valRed2" xstyle="background-color:red;border-radius:5px;color:white;opacity:0.8">55</div>
+                                                </div>
+                                                <div class="w3-col m4 w3-container w3-center">
+                                                <p>GREEN</p>
+                                                <input onchange="changeRGB()" oninput="changeRGB()" type="range" id="slideGreen" name="slideGreen" value="9" min="0" max="255">
+                                                <div id="valGreen2" xstyle="background-color:#00ff00;border-radius:5px;opacity:0.8">99</div>
+                                                </div>
+                                                <div class="w3-col m4 w3-container w3-center">
+                                                <p>BLUE</p>
+                                                <input onchange="changeRGB()" oninput="changeRGB()" type="range" id="slideBlue" name="slideBlue" value="71" min="0" max="255">
+                                                <div id="valBlue2" xstyle="background-color:blue;border-radius:5px;color:white;opacity:0.8">71</div>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-row w3-center" style="margin:0 -16px; line-height:80px;color:white;">
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(255, 0, 0);">rgb(255, 0, 0)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(0, 0, 255);">rgb(0, 0, 255)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(60, 179, 113);">rgb(60, 179, 113)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(238, 130, 238);">rgb(238, 130, 238)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(255, 165, 0);">rgb(255, 165, 0)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(106, 90, 205);">rgb(106, 90, 205)</div>
+                                                </div>
+                                                
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_color_hex2">Try it Yourself »</a> 
+                                               
+                                        </div>  
+                                        <div class="w3-panel">
+                                            <p>Shades of gray are often defined using equal values for all the 3 light sources:</p>
+                                        </div>
+                                        <div class="w3-example">
+                                            <h3>Example</h3>
+                                            <div class="w3-row w3-center" style="margin:0 -16px; line-height:80px;color:white;">
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(0, 0, 0);">rgb(0, 0, 0)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(60, 60, 60);">rgb(60, 60, 60)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(120, 120, 120);">rgb(120, 120, 120)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(180, 180, 180);">rgb(180, 180, 180)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(240, 240, 240);color:black;">rgb(240, 240, 240)</div>
+                                                </div>
+                                                <div class="w3-col 13 m6 w3-padding">
+                                                    <div style="background-color:rgb(255, 255, 255);color:black;">rgb(106, 90, 205)</div>
+                                                </div>
+                                                
+                                            </div>
+                                            <a target="_blank" class="w3-btn w3-margin-bottom" href="https://www.w3schools.com/css/tryit.asp?filename=trycss_color_hex2">Try it Yourself »</a> 
+                                                   
+                                        </div>                         
+                                    </div>
+                                </div>
+                            </div>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+                
+        <script>
+            /*Menu-toggle*/
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+                
+            });
+            changeRGB("r");
+                function changeRGB(x) {
+                    var col, r, g, b;
+                    r = document.getElementById("slideRed").value;
+                    g = document.getElementById("slideGreen").value;
+                    b = document.getElementById("slideBlue").value;
+                    col = w3color("rgb(" + r + "," + g + "," + b + ")");
+                    document.getElementById('valRed2').innerHTML = r;
+                    document.getElementById('valGreen2').innerHTML = g;
+                    document.getElementById('valBlue2').innerHTML = b;
+                    document.getElementById('rgbresult').style.backgroundColor = col.toRgbString();
+                    document.getElementById('rgbresulttext').innerHTML = col.toRgbString();
+                    if (col.isDark(150)) {
+                    document.getElementById('rgbresulttext').style.color = "#ffffff";
+                    } else {
+                    document.getElementById('rgbresulttext').style.color = "#1f2d3d";
+                    }
+                }
+        </script>
+    </body>
+</html>
+
